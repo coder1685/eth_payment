@@ -1,0 +1,22 @@
+﻿<div class="col-sm-8 col-sm-offset-2">
+<div class="col-md-6 col-md-offset-3">
+<form name="form" (ngSubmit)="f.form.valid && accountSelect()" #f="ngForm" novalidate>
+      <div class="form-group" style="width: 435px;" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <label for="usernameList">Account List</label>
+        <select class="form-control" name="account" [id]="account" (change)="onSelect()" [(ngModel)]="model.account" #username="ngModel" required>
+          <option *ngFor="let accountName of accountList" [value]="accountName.key">{{accountName.value}}</option>
+        </select>
+        <div *ngIf="f.submitted && !username.valid" class="help-block">Account Name is required</div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Select Account</button>
+      </div>
+    </form>
+ <div style="margin-left: 10px;">
+ <address-list *ngIf="isEthAddressNotEmpty"></address-list>
+ </div>
+</div>
+</div>
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '15px' }"></ngx-loading>
+</div>

@@ -1,0 +1,32 @@
+<body>
+<header style="margin-top: 20px;">
+  <div class="container">
+    <div class="row gap-y align-items-center">
+      <div class="col-12 col-lg-3">
+        <p class="text-center text-lg-left">
+          <a [routerLink]="['/home']" data-scrollto="section-home"><img src="assets/img/logo.svg" alt="logo" width="auto" height="25px"></a>
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <button style="margin-left: 800px;" class="btn btn-primary" (click)="onClick()" > LOGOUT </button>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="container" >
+<div style="color: blue; margin-top: 45px;" >
+    <h1>{{title}}</h1>
+  </div>
+  <form-upload></form-upload>
+  <br/>
+  <div [hidden]="!isTransferFunds">
+    <label style="font-weight: bold">Funds are scheduled for transfer!! </label>
+  </div>
+</div>
+</main>
+</body>
+<footer>
+  <ethpayment-footer></ethpayment-footer>
+</footer>

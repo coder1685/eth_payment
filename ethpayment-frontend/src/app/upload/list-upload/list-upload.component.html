@@ -1,0 +1,24 @@
+<button class="btn btn-success" *ngIf='!showFile'
+	(click)='showFiles(true)'>Download Report</button>
+
+<div *ngIf='showFile'>
+  <button class="btn btn-success" *ngIf='showFile'
+          (click)='showFiles(false)'>Hide Report</button>
+</div>
+
+<div [hidden]="!showFile">
+  <div *ngIf="fileList.length > 0">
+	<div class="panel panel-primary">
+		<div class="panel-heading">List of Reports</div>
+		<div *ngFor="let file of fileUploads | async">
+			<div class="panel-body">
+				<details-upload [fileUpload]='file'></details-upload>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+
+<div class="my-container">
+  <ngx-loading [show]="isListLoad" [config]="{ backdropBorderRadius: '15px' }"></ngx-loading>
+</div>

@@ -1,0 +1,60 @@
+<table>
+  <tr>
+    <td>
+      <ag-grid-angular style="width: 495px; height: 110px; margin-top: 15px; margin-left: -12px;"
+                       [style.height]="gridHeight"
+                       class="ag-fresh"
+                       [rowData]="rowData"
+                       [columnDefs]="columnDefs"
+                       [gridOptions]="gridOptions"
+                       (gridReady)="onGridReady($event)">
+      </ag-grid-angular>
+    </td>
+  </tr>
+  <div [hidden]="!isDateNull">
+  <form name="form" (ngSubmit)="f.form.valid && transferFunds('false')" #f="ngForm" novalidate>
+  <tr>
+    <td>
+      <div style="margin-top: 17px; margin-left: -20px;" class="ui-g-12 ui-md-4" [ngClass]="{ 'has-error': f.submitted && !date.valid }">
+        <span>Select Date</span>
+        <p-calendar name="date" [id]="date" [(ngModel)]="model.date" #date="ngModel" [showIcon]="true" [showTime]="true" required></p-calendar>
+        <div *ngIf="f.submitted && !date.valid" class="help-block">Date is required</div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <button class="btn btn-success" style="margin-top: 24px; margin-left: -12px;"
+              [disabled]="isTransferFunds">Transfer Funds</button>
+    </td>
+  </tr>
+  </form>
+  </div>
+    <div [hidden]="isDateNull">
+    <tr>
+      <td>
+        <div style="margin-top: 17px; margin-left: -20px;" class="ui-g-12 ui-md-4">
+          <span>Select Date</span>
+          <p-calendar name="date" [id]="date" [(ngModel)]="model.date" #date="ngModel" [showIcon]="true" [showTime]="true" required></p-calendar>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button
+          class="btn btn-success" style="margin-top: 24px; margin-left: -12px;"
+          mwlConfirmationPopover
+          [popoverTitle]="popoverTitle"
+          [popoverMessage]="popoverMessage"
+          placement="right"
+          [disabled]="isTransferFunds"
+          (confirm)="transferFunds('true')"
+          (cancel)="cancelClicked()">
+          Transfer Funds
+        </button>
+      </td>
+    </tr>
+  </div>
+  <div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '15px', fullScreenBackdrop: true}"></ngx-loading>
+  </div>
